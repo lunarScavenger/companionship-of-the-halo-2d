@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://ps0ysqpxd8bs"]
+
+[ext_resource type="Script" path="res://ui/main-menu/MainMenu.gd" id="1_fse0a"]
+[ext_resource type="FontFile" uid="uid://bdxlxyrmmcmmd" path="res://assets/fonts/NovaOval-Regular.ttf" id="2_37bnt"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fse0a")
+
+[node name="Background" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.670588, 0.647059, 0.847059, 1)
+
+[node name="Title" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 75.0
+offset_right = 40.0
+offset_bottom = 115.0
+
+[node name="Title" type="Label" parent="Title"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 150.0
+theme_override_fonts/font = ExtResource("2_37bnt")
+theme_override_font_sizes/font_size = 100
+text = "Companionship of the Halo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 760.0
+offset_top = 700.0
+offset_right = 1160.0
+offset_bottom = 800.0
+
+[node name="Start" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("2_37bnt")
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[connection signal="button_up" from="Buttons/Start" to="." method="_on_start_button_up"]
