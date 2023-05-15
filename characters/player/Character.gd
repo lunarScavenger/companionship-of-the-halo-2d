@@ -1,34 +1,34 @@
 extends CharacterBody2D
 
-
 @export var speed = 400.0
-const JUMP_VELOCITY = -700.0
-signal text
-var apple = false
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+@onready var _animation_player = $AnimationPlayer
+var direction = "Right" # default to facing right
+
+# get input
 func get_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
+	var input_direction = Input.get_vector("left", "right", "up", "down") # direction
+	velocity = input_direction * speed # velocity
+	
+	# animation
+	if Input.is_action_pressed("right"): # moving right
+		# direction
+		if direction != "Right":
+			get_node("Sprite2D").set_flip_h(false)
+			direction = "Right"
+		# animation
+		_animation_player.play("walk")
+	elif Input.is_action_pressed("left"): # moving left
+		# direction
+		if direction != "Left":
+			get_node("Sprite2D").set_flip_h(true)
+			direction = "Left"
+		# animation
+		_animation_player.play("walk")
+	else:
+		_animation_player.stop() # moving up/down / not moving
 
-#func attack():
-	#if Input.is_action_just_released("attack"):
-		#get_node("AttackTemp").show()
-		#get_node("AttackTemp/TempTimer").start()
-
+# 
 func _physics_process(delta):
-	#attack()
 	get_input()
 	move_and_slide()
-
-#func _on_area_2d_body_entered(body):
-	#if apple == true:
-		#text.emit()
-
-
-#func _on_timer_timeout():
-	#apple = true
-
-
-#func _on_temp_timer_timeout():
-	#get_node("AttackTemp").hide()

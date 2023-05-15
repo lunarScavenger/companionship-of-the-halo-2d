@@ -1,10 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://beid6yn2k5bld"]
+[gd_scene load_steps=7 format=3 uid="uid://beid6yn2k5bld"]
 
-[ext_resource type="Texture2D" uid="uid://ec00vwypyqf5" path="res://icon.svg" id="1_o807h"]
 [ext_resource type="Script" path="res://characters/player/Character.gd" id="1_p5dn0"]
+[ext_resource type="Texture2D" uid="uid://chqyshqivjlm8" path="res://assets/characters/frodo/Frodo-Sprite-Sheet.png" id="2_0w7b0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddvfm"]
-size = Vector2(127, 127)
+size = Vector2(12, 19)
+
+[sub_resource type="Animation" id="Animation_udt0u"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_jjjh2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1t4lc"]
+_data = {
+"RESET": SubResource("Animation_jjjh2"),
+"walk": SubResource("Animation_udt0u")
+}
 
 [node name="Player" type="Node2D"]
 
@@ -12,8 +50,19 @@ size = Vector2(127, 127)
 script = ExtResource("1_p5dn0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
-position = Vector2(0.5, 0.5)
+position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_ddvfm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Character"]
-texture = ExtResource("1_o807h")
+texture = ExtResource("2_0w7b0")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_1t4lc")
+}
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
+zoom = Vector2(2.25, 2.25)
