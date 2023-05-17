@@ -9,6 +9,9 @@ var direction = "Right" # default to facing right
 var health = 100
 var alive = true
 
+func player():
+	pass # literally just to check off as a player
+
 # get input
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down") # direction
@@ -39,6 +42,7 @@ func _physics_process(delta):
 	
 	# player death
 	if health <= 0:
+		death.emit()
 		alive = false
 		health = 0
 		print("player died")
@@ -47,8 +51,5 @@ func _physics_process(delta):
 
 func _on_hitbox_body_entered(body):
 	if body.has_method("enemy"):
-		health = 0
-		death.emit()
-
-func player():
-	pass # # literally just to check off as a player
+		health -= 25
+		print("player health: " + str(health))
