@@ -49,8 +49,9 @@ radius = 20.025
 [sub_resource type="CircleShape2D" id="CircleShape2D_61mwl"]
 radius = 29.1548
 
-[node name="Ringwraith" type="CharacterBody2D"]
+[node name="Ringwraith" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
 script = ExtResource("1_ck10a")
+sprite = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 3.5)

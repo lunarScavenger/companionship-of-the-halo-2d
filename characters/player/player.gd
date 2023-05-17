@@ -3,14 +3,13 @@ extends CharacterBody2D
 signal death
 
 @export var speed = 400.0
+@export var sprite : Sprite2D
 
 @onready var _animation_player = $AnimationPlayer
 var direction = "Right" # default to facing right
 var health = 100
 var alive = true
 
-func player():
-	pass # literally just to check off as a player
 
 # get input
 func get_input():
@@ -21,14 +20,14 @@ func get_input():
 	if Input.is_action_pressed("right"): # moving right
 		# direction
 		if direction != "Right":
-			get_node("Sprite2D").set_flip_h(false)
+			sprite.set_flip_h(false)
 			direction = "Right"
 		# animation
 		_animation_player.play("walk")
 	elif Input.is_action_pressed("left"): # moving left
 		# direction
 		if direction != "Left":
-			get_node("Sprite2D").set_flip_h(true)
+			sprite.set_flip_h(true)
 			direction = "Left"
 		# animation
 		_animation_player.play("walk")
@@ -50,6 +49,6 @@ func _physics_process(delta):
 
 
 func _on_hitbox_body_entered(body):
-	if body.has_method("enemy"):
+	if body.is_in_group("enemy"):
 		health -= 25
 		print("player health: " + str(health))
