@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lx86pd15gujb"
-path="res://.godot/imported/kenney-tiny-town-tilemap.png-811034ce31aa62bc9813c67fbc5802bf.ctex"
+uid="uid://5i0gqarh6uwo"
+path="res://.godot/imported/kenney-tiny-town-tilemap-packed.png-c69c30414ffdaf4a592642f2ffe3131e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/kenney-tiny-town-tilemap.png"
-dest_files=["res://.godot/imported/kenney-tiny-town-tilemap.png-811034ce31aa62bc9813c67fbc5802bf.ctex"]
+source_file="res://assets/world/kenney-tiny-town-tilemap-packed.png"
+dest_files=["res://.godot/imported/kenney-tiny-town-tilemap-packed.png-c69c30414ffdaf4a592642f2ffe3131e.ctex"]
 
 [params]
 
