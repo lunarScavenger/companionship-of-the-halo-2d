@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://gtvtpaoo0cdh"]
+[gd_scene load_steps=6 format=3 uid="uid://dlla0sdxepx7p"]
 
-[ext_resource type="PackedScene" uid="uid://beid6yn2k5bld" path="res://characters/player/player.tscn" id="1_hm125"]
+[ext_resource type="PackedScene" uid="uid://1gjmnhuhv5c" path="res://characters/player/player.tscn" id="1_hm125"]
 [ext_resource type="Texture2D" uid="uid://ec00vwypyqf5" path="res://icon.svg" id="2_ndmjy"]
+[ext_resource type="PackedScene" uid="uid://ce0nrcuktniu7" path="res://characters/ringwraith/ringwraith.tscn" id="3_gd61q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qkuh4"]
 size = Vector2(128, 128)
@@ -53,3 +54,7 @@ shape = SubResource("RectangleShape2D_pffnw")
 
 [node name="Timer" type="Timer" parent="CollisionArea"]
 autostart = true
+
+[node name="Ringwraith" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_gd61q")]
+position = Vector2(1743, 249)
+player = NodePath("../Player")
