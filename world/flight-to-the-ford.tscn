@@ -58,3 +58,5 @@ autostart = true
 [node name="Ringwraith" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_gd61q")]
 position = Vector2(1743, 249)
 player = NodePath("../Player")
+
+[connection signal="death" from="Player" to="Ringwraith" method="_on_player_death"]

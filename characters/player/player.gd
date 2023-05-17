@@ -1,9 +1,13 @@
 extends CharacterBody2D
 
+signal death
+
 @export var speed = 400.0
 
 @onready var _animation_player = $AnimationPlayer
 var direction = "Right" # default to facing right
+var health = 100
+var alive = true
 
 # get input
 func get_input():
@@ -28,7 +32,23 @@ func get_input():
 	else:
 		_animation_player.stop() # moving up/down / not moving
 
-# 
+
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+	
+	# player death
+	if health <= 0:
+		alive = false
+		health = 0
+		print("player died")
+		self.queue_free()
+
+
+func _on_hitbox_body_entered(body):
+	if body.has_method("enemy"):
+		health = 0
+		death.emit()
+
+func player():
+	pass # # literally just to check off as a player

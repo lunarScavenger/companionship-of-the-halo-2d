@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1gjmnhuhv5c"]
+[gd_scene load_steps=8 format=3 uid="uid://1gjmnhuhv5c"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_uinkb"]
 [ext_resource type="Texture2D" uid="uid://chqyshqivjlm8" path="res://assets/characters/frodo/Frodo-Sprite-Sheet.png" id="2_0w7b0"]
@@ -44,6 +44,9 @@ _data = {
 "walk": SubResource("Animation_udt0u")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_42epw"]
+radius = 17.72
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uinkb")
 
@@ -64,3 +67,11 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.25, 2.25)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_42epw")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
