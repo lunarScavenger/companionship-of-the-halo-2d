@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyjbadvf06l3g"]
+[gd_scene load_steps=9 format=3 uid="uid://dyjbadvf06l3g"]
 
+[ext_resource type="PackedScene" uid="uid://ww4mrokmxxke" path="res://world/rings/rings.tscn" id="1_dcd6y"]
 [ext_resource type="PackedScene" uid="uid://1gjmnhuhv5c" path="res://characters/player/player.tscn" id="1_hm125"]
 [ext_resource type="Texture2D" uid="uid://5i0gqarh6uwo" path="res://assets/world/kenney-tiny-town-tilemap-packed.png" id="1_suei5"]
 [ext_resource type="PackedScene" uid="uid://dbwx52t1kme5y" path="res://ui/hud/hud.tscn" id="2_o8toc"]
@@ -423,6 +424,9 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_2r0vh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1167a"]
+size = Vector2(12, 19)
+
 [node name="flight-to-the-ford" type="Node2D"]
 y_sort_enabled = true
 
@@ -445,6 +449,12 @@ position = Vector2(40, 1043)
 collision_layer = 2
 collision_mask = 5
 
+[node name="test" type="Area2D" parent="Player"]
+
+[node name="Test" type="CollisionShape2D" parent="Player/test" groups=["apple"]]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_1167a")
+
 [node name="Nazgul" type="Node" parent="."]
 
 [node name="Ringwraith" parent="Nazgul" node_paths=PackedStringArray("player") instance=ExtResource("3_gd61q")]
@@ -457,6 +467,7 @@ player = NodePath("../../Player")
 
 [node name="Ringwraith3" parent="Nazgul" node_paths=PackedStringArray("player") instance=ExtResource("3_gd61q")]
 position = Vector2(451, 457)
+speed = 100
 player = NodePath("../../Player")
 
 [node name="Ringwraith4" parent="Nazgul" node_paths=PackedStringArray("player") instance=ExtResource("3_gd61q")]
@@ -470,8 +481,13 @@ offset_right = 40.0
 offset_bottom = 1043.0
 player = NodePath("../Player")
 
+[node name="rings" parent="." instance=ExtResource("1_dcd6y")]
+position = Vector2(39, 990)
+
 [connection signal="death" from="Player" to="Nazgul/Ringwraith" method="_on_player_death"]
 [connection signal="death" from="Player" to="Nazgul/Ringwraith2" method="_on_player_death"]
 [connection signal="death" from="Player" to="Nazgul/Ringwraith3" method="_on_player_death"]
 [connection signal="death" from="Player" to="Nazgul/Ringwraith4" method="_on_player_death"]
 [connection signal="death" from="Player" to="HUD" method="_on_player_death"]
+[connection signal="ring" from="Player" to="rings" method="_on_player_ring"]
+[connection signal="area_entered" from="Player/test" to="Player" method="_on_test_area_entered"]

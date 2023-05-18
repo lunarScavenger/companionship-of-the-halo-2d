@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal death
+signal ring
 
 @export var speed = 400.0
 @export var max_health: float = 100.0
@@ -58,7 +59,18 @@ func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemy"):
 		update_health(-25)
 		print("player health: " + str(health))
+	if body.is_in_group("ring"):
+		print("hello")
 
 
 func _on_timer_timeout():
-	counter += 1
+	pass
+	#counter += 1
+
+
+
+func _on_test_area_entered(area):
+	print(area)
+	if str(area) == 'Ring:<Area2D#32027706738>':
+		ring.emit()
+		counter += 10

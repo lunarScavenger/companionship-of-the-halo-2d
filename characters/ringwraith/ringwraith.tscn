@@ -79,4 +79,9 @@ shape = SubResource("CircleShape2D_m1rgd")
 [node name="HitZone" type="CollisionShape2D" parent="HitZone"]
 shape = SubResource("CircleShape2D_61mwl")
 
+[node name="SpeedTimer" type="Timer" parent="."]
+wait_time = 12.0
+autostart = true
+
 [connection signal="body_entered" from="HitZone" to="." method="_on_hit_zone_body_entered"]
+[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
