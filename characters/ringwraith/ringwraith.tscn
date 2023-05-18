@@ -50,6 +50,7 @@ radius = 20.025
 radius = 29.1548
 
 [node name="Ringwraith" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
+z_index = 2
 script = ExtResource("1_ck10a")
 sprite = NodePath("Sprite2D")
 

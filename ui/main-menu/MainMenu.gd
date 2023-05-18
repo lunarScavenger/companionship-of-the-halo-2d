@@ -5,6 +5,7 @@ var show_credits: bool = false
 func _ready():
 	print("loaded main menu")
 
+
 func _on_start_button_up():
 	get_tree().change_scene_to_file("res://world/flight-to-the-ford.tscn")
 

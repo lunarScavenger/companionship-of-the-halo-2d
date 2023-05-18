@@ -48,6 +48,7 @@ _data = {
 radius = 17.72
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["player"]]
+z_index = 2
 script = ExtResource("1_uinkb")
 sprite = NodePath("Sprite2D")
 

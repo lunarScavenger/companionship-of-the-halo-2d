@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyjbadvf06l3g"]
+[gd_scene load_steps=8 format=3 uid="uid://dyjbadvf06l3g"]
 
 [ext_resource type="PackedScene" uid="uid://1gjmnhuhv5c" path="res://characters/player/player.tscn" id="1_hm125"]
 [ext_resource type="Texture2D" uid="uid://5i0gqarh6uwo" path="res://assets/world/kenney-tiny-town-tilemap-packed.png" id="1_suei5"]
 [ext_resource type="PackedScene" uid="uid://dbwx52t1kme5y" path="res://ui/hud/hud.tscn" id="2_o8toc"]
 [ext_resource type="PackedScene" uid="uid://ce0nrcuktniu7" path="res://characters/ringwraith/ringwraith.tscn" id="3_gd61q"]
+[ext_resource type="PackedScene" uid="uid://dd5vw0o0i2cgf" path="res://world/castle.tscn" id="5_bljac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2r0vh"]
 texture = ExtResource("1_suei5")
@@ -468,6 +469,11 @@ offset_left = 40.0
 offset_top = 1043.0
 offset_right = 40.0
 offset_bottom = 1043.0
+player = NodePath("../Player")
+
+[node name="Castle" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_bljac")]
+z_index = 1
+position = Vector2(959, -145)
 player = NodePath("../Player")
 
 [connection signal="death" from="Player" to="Nazgul/Ringwraith" method="_on_player_death"]
