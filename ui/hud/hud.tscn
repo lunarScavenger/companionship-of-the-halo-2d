@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbwx52t1kme5y"]
+[gd_scene load_steps=5 format=3 uid="uid://dbwx52t1kme5y"]
 
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="1_a1owj"]
+[ext_resource type="FontFile" uid="uid://bdxlxyrmmcmmd" path="res://assets/fonts/NovaOval-Regular.ttf" id="2_qlani"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwpgu"]
 bg_color = Color(0.964706, 0.364706, 0.458824, 1)
@@ -29,3 +30,12 @@ theme = SubResource("Theme_n5y25")
 step = 1.0
 value = 80.0
 show_percentage = false
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 21.0
+offset_top = 21.0
+offset_right = 175.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("2_qlani")
+theme_override_font_sizes/font_size = 48
+text = "Score: "

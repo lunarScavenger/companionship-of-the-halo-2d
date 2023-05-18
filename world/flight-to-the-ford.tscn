@@ -16,17 +16,6 @@ size = Vector2(1016.5, 410.5)
 [node name="Player" parent="." instance=ExtResource("1_hm125")]
 
 [node name="HUD" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("2_o8toc")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 1826.23
-offset_top = 770.383
-offset_right = 1826.23
-offset_bottom = 770.383
-grow_horizontal = 1
-grow_vertical = 1
-size_flags_horizontal = 6
-size_flags_vertical = 6
 player = NodePath("..")
 
 [node name="Obstacle1" type="Node2D" parent="."]

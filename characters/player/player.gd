@@ -10,6 +10,7 @@ signal death
 var direction = "Right" # default to facing right
 var health: float = 100.0
 var alive = true
+var counter: int = 0
 
 
 # get input
@@ -57,3 +58,7 @@ func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemy"):
 		update_health(-25)
 		print("player health: " + str(health))
+
+
+func _on_timer_timeout():
+	counter += 1

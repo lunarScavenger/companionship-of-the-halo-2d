@@ -12,3 +12,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	health_bar.value = player.health
+	$CanvasLayer/Score.text = "Score: " + str(player.counter)
