@@ -9,7 +9,7 @@ signal death
 @onready var _animation_player = $AnimationPlayer
 var direction = "Right" # default to facing right
 var health: float = 100.0
-var alive = true
+var alive: bool = true
 var counter: int = 0
 
 

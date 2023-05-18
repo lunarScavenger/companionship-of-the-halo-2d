@@ -11,7 +11,7 @@ var chasing = true
 func _physics_process(delta):
 	# follow player
 	if chasing:
-		position += (player.position - position) / speed
+		self.position += (player.position - self.position) / speed
 		
 		# turn toward player
 		if (player.position > position):
