@@ -1,7 +1,20 @@
 extends Control
 
+var show_credits: bool = false
+
 func _ready():
-	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (true) else Window.MODE_WINDOWED
+	print("loaded main menu")
 
 func _on_start_button_up():
-	print("Hello")
+	get_tree().change_scene_to_file("res://world/flight-to-the-ford.tscn")
+
+
+func _on_credits_pressed():
+	if show_credits:
+		$Text/Credits.hide()
+		show_credits = false
+		print("show")
+	else:
+		$Text/Credits.show()
+		show_credits = true
+		print("hide")

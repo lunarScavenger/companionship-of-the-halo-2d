@@ -23,13 +23,13 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.670588, 0.647059, 0.847059, 1)
 
-[node name="Title" type="Control" parent="."]
+[node name="Text" type="Control" parent="."]
 anchors_preset = 0
 offset_top = 75.0
 offset_right = 40.0
 offset_bottom = 115.0
 
-[node name="Title" type="Label" parent="Title"]
+[node name="Title" type="Label" parent="Text"]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 150.0
@@ -38,6 +38,22 @@ theme_override_font_sizes/font_size = 100
 text = "Companionship of the Halo"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="Text"]
+visible = false
+layout_mode = 0
+offset_left = 288.0
+offset_top = 181.0
+offset_right = 1640.0
+offset_bottom = 501.0
+theme_override_fonts/font = ExtResource("2_37bnt")
+theme_override_font_sizes/font_size = 50
+text = "Credits
+
+Kenney - Public Domain Tiny Town Textures - kenney.nl
+
+Wojciech Kalinowski - Nova Oval Font"
+horizontal_alignment = 1
 
 [node name="Buttons" type="Control" parent="."]
 anchors_preset = 0
@@ -54,4 +70,14 @@ theme_override_fonts/font = ExtResource("2_37bnt")
 theme_override_font_sizes/font_size = 50
 text = "Start"
 
+[node name="Credits" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_top = 147.0
+offset_right = 400.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("2_37bnt")
+theme_override_font_sizes/font_size = 50
+text = "Show Credits"
+
 [connection signal="button_up" from="Buttons/Start" to="." method="_on_start_button_up"]
+[connection signal="pressed" from="Buttons/Credits" to="." method="_on_credits_pressed"]
