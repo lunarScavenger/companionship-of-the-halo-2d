@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlla0sdxepx7p"]
+
+[ext_resource type="PackedScene" uid="uid://1gjmnhuhv5c" path="res://characters/player/player.tscn" id="1_hm125"]
+[ext_resource type="Texture2D" uid="uid://ec00vwypyqf5" path="res://icon.svg" id="2_ndmjy"]
+[ext_resource type="PackedScene" uid="uid://dbwx52t1kme5y" path="res://ui/hud/hud.tscn" id="2_o8toc"]
+[ext_resource type="PackedScene" uid="uid://ce0nrcuktniu7" path="res://characters/ringwraith/ringwraith.tscn" id="3_gd61q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkuh4"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pffnw"]
+size = Vector2(1016.5, 410.5)
+
+[node name="FlightToTheFord" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_hm125")]
+
+[node name="HUD" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("2_o8toc")]
+player = NodePath("..")
+
+[node name="Obstacle1" type="Node2D" parent="."]
+position = Vector2(700, 1000)
+scale = Vector2(10, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Obstacle1"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle1/StaticBody2D"]
+shape = SubResource("RectangleShape2D_qkuh4")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle1/StaticBody2D"]
+texture = ExtResource("2_ndmjy")
+metadata/_edit_lock_ = true
+
+[node name="Obstacle2" type="Node2D" parent="."]
+position = Vector2(1500, 900)
+scale = Vector2(10, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Obstacle2"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_qkuh4")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle2/StaticBody2D"]
+texture = ExtResource("2_ndmjy")
+metadata/_edit_lock_ = true
+
+[node name="CollisionArea" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="CollisionArea"]
+position = Vector2(1600, 650)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea/Area2D"]
+shape = SubResource("RectangleShape2D_pffnw")
+
+[node name="Timer" type="Timer" parent="CollisionArea"]
+autostart = true
+
+[node name="Ringwraith" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_gd61q")]
+position = Vector2(1743, 249)
+player = NodePath("../Player")
+
+[connection signal="death" from="Player" to="Ringwraith" method="_on_player_death"]

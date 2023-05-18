@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://1gjmnhuhv5c"]
+
+[ext_resource type="Script" path="res://characters/player/player.gd" id="1_uinkb"]
+[ext_resource type="Texture2D" uid="uid://chqyshqivjlm8" path="res://assets/characters/frodo/Frodo-Sprite-Sheet.png" id="2_0w7b0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddvfm"]
+size = Vector2(12, 19)
+
+[sub_resource type="Animation" id="Animation_jjjh2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_udt0u"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1t4lc"]
+_data = {
+"RESET": SubResource("Animation_jjjh2"),
+"walk": SubResource("Animation_udt0u")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42epw"]
+radius = 17.72
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["player"]]
+script = ExtResource("1_uinkb")
+sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_ddvfm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0w7b0")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_1t4lc")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.25, 2.25)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_42epw")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

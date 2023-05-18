@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://ce0nrcuktniu7"]
+
+[ext_resource type="Script" path="res://characters/ringwraith/ringwraith.gd" id="1_ck10a"]
+[ext_resource type="Texture2D" uid="uid://tgniob5e310i" path="res://assets/characters/ringwraith/Ringwraith-Sprite-Sheet.png" id="2_bbm83"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03bun"]
+size = Vector2(23, 25)
+
+[sub_resource type="Animation" id="Animation_7iden"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 5, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_boor8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpy3t"]
+_data = {
+"RESET": SubResource("Animation_boor8"),
+"attack": SubResource("Animation_7iden")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1rgd"]
+radius = 20.025
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_61mwl"]
+radius = 29.1548
+
+[node name="Ringwraith" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
+script = ExtResource("1_ck10a")
+sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 3.5)
+shape = SubResource("RectangleShape2D_03bun")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bbm83")
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xpy3t")
+}
+
+[node name="KillZone" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="KillZone" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("CircleShape2D_m1rgd")
+
+[node name="HitZone" type="Area2D" parent="."]
+
+[node name="HitZone" type="CollisionShape2D" parent="HitZone"]
+shape = SubResource("CircleShape2D_61mwl")
+
+[connection signal="body_entered" from="HitZone" to="." method="_on_hit_zone_body_entered"]
