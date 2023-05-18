@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbwx52t1kme5y"]
+
+[ext_resource type="Script" path="res://ui/hud/hud.gd" id="1_a1owj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwpgu"]
+bg_color = Color(0.964706, 0.364706, 0.458824, 1)
+
+[sub_resource type="Theme" id="Theme_n5y25"]
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_vwpgu")
+
+[node name="HUD" type="Control" node_paths=PackedStringArray("health_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a1owj")
+health_bar = NodePath("CanvasLayer/HealthBar")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 1531.0
+offset_top = 979.0
+offset_right = 1851.0
+offset_bottom = 1011.0
+theme = SubResource("Theme_n5y25")
+step = 1.0
+value = 80.0
+show_percentage = false

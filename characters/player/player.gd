@@ -3,11 +3,12 @@ extends CharacterBody2D
 signal death
 
 @export var speed = 400.0
+@export var max_health: float = 100.0
 @export var sprite : Sprite2D
 
 @onready var _animation_player = $AnimationPlayer
 var direction = "Right" # default to facing right
-var health = 100
+var health: float = 100.0
 var alive = true
 
 
@@ -48,7 +49,11 @@ func _physics_process(delta):
 		self.queue_free()
 
 
+func update_health(delta):
+	health += delta
+
+
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemy"):
-		health -= 25
+		update_health(-25)
 		print("player health: " + str(health))
